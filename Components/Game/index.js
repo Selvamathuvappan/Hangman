@@ -5,29 +5,35 @@ import Letters from "./Letters"
 import Start from "./Start"
 
 function Game() {
-    const [lives, setLives] = useState(6);
     const [puzzle, setPuzzle] = useState("");
     const [playedLetters, setPlayedLetters] = useState(0);
-    const [allLetters, setAllLetters] = useState(0);
 
     const start = () => {
         setPuzzle("survivor");
-        let mask = 0;
-        puzzle.split("").forEach((ch) => {
-            mask |= (1 << (ch.charCodeAt(0) - 'a'.charCodeAt(0)))
-        })
-        setAllLetters(mask) 
     }
 
+    let allLetters = 0;
+    puzzle.split("").forEach((ch) => {
+        allLetters |= (1 << (ch.charCodeAt(0) - 'a'.charCodeAt(0)))
+    }) 
+
     const guess = letter => {
-        if(!(allLetters & (1 << (letter.charCodeAt(0) - 'a'.charCodeAt(0))))) setLives(prvLives => prvLives - 1)
         setPlayedLetters(prvMask => prvMask | (1 << (letter.charCodeAt(0) - 'a'.charCodeAt(0))))
     }
 
+    const setBits = num => {
+        let bitCnt = 0;
+        while(num){
+            bitCnt++;
+            num &= num - 1;
+        }
+        return bitCnt;
+    }
+
+    let lives = 6 - (setBits(playedLetters&(~allLetters)))
     const isWon = Boolean(lives) && Boolean(allLetters) && Boolean((playedLetters&allLetters) === allLetters)
     const isRunning = Boolean(lives) && Boolean(allLetters) && Boolean(!isWon)
-    console.log(isRunning, isWon);
-    console.log(allLetters);
+    
     return (
         <div> 
             <Lives livesLeft={lives}/>
