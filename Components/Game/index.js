@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
-import Lives from "./Lives"
-import Word from "./Word"
-import Letters from "./Letters"
-import Start from "./Start"
+import Layout from "./Layout";
 
 function Game() {
     const [puzzle, setPuzzle] = useState("");
@@ -10,6 +7,7 @@ function Game() {
 
     const start = () => {
         setPuzzle("survivor");
+        setPlayedLetters(0);
     }
 
     let allLetters = 0;
@@ -35,12 +33,15 @@ function Game() {
     const isRunning = Boolean(lives) && Boolean(allLetters) && Boolean(!isWon)
     
     return (
-        <div> 
-            <Lives livesLeft={lives}/>
-            {isRunning && <Word puzzle={puzzle} playedLetters={playedLetters} />}
-            <Letters guess={guess} isRunning={isRunning} playedLetters={playedLetters}/>
-            <Start onStart={start} isWon={isWon}/>
-        </div>
+        < Layout 
+        lives = {lives} 
+        puzzle = {puzzle} 
+        playedLetters = {playedLetters} 
+        guess = {guess} 
+        isRunning = {isRunning} 
+        start = {start} 
+        isWon = {isWon} 
+        />
     )
 }
 
