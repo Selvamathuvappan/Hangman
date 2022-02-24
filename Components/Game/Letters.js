@@ -10,7 +10,7 @@ export default function Letters({guess, isRunning, playedLetters}) {
                 <button
                 className = "start-button start-button--letter"
                 onClick = {() => guess(ch)}
-                disabled = {Boolean(!isRunning) || Boolean(playedLetters&(1 << (ch.charCodeAt(0) - 'a'.charCodeAt(0))))}
+                disabled = {!isRunning || !!(playedLetters&(1 << (ch.charCodeAt(0) - 'a'.charCodeAt(0))))}
                 key = {idx}
                 >
                     {ch}

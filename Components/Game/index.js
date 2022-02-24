@@ -29,8 +29,8 @@ function Game() {
     }
 
     let lives = 6 - (setBits(playedLetters&(~allLetters)))
-    const isWon = Boolean(lives) && Boolean(allLetters) && Boolean((playedLetters&allLetters) === allLetters)
-    const isRunning = Boolean(lives) && Boolean(allLetters) && Boolean(!isWon)
+    const isWon = !!lives && !!allLetters && ((playedLetters&allLetters) === allLetters)
+    const isRunning = !!lives && !!allLetters && !isWon
     
     return (
         < Layout 
