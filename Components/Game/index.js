@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import Layout from "./Layout";
+const randomWords = require('random-words');
 
 function Game() {
     const [puzzle, setPuzzle] = useState("");
     const [playedLetters, setPlayedLetters] = useState(0);
 
     const start = () => {
-        setPuzzle("survivor");
+        setPuzzle(randomWords());
         setPlayedLetters(0);
     }
 

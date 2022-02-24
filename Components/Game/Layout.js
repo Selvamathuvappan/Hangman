@@ -13,11 +13,11 @@ function Layout({
             <Lives livesLeft={lives} isWon = {isWon}/>
         </div>
         <div className = "right-pane"> 
-            {isRunning && <Word puzzle={puzzle} playedLetters={playedLetters} />}
+            {<Word puzzle={puzzle} playedLetters={playedLetters} livesLeft = {lives}/>}
             <Letters guess={guess} isRunning={isRunning} playedLetters={playedLetters}/>
             <br/>
             <br/>
-            <Start onStart={start} isWon={isWon}isRunning = {isRunning} livesLeft = {lives}/>
+            <Start onStart={start} isWon={isWon} isRunning = {isRunning} livesLeft = {lives}/>
         </div>
     </div>
   )
